@@ -27,7 +27,7 @@ This package is for use in the [Angular 2] framework.
 In a parent / shared module, import the PDF417BarcodeComponent,
 either by exporting the Component as a Directive or simply re-export the provided module:
 
-```typescript
+```javascript
 /* angular */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -56,3 +56,21 @@ Then use it in your component's template:
 </div>
 ```
 ![barcode](https://cloud.githubusercontent.com/assets/11139925/19278474/9c18d700-8fdd-11e6-91c2-84727749e9b4.png)
+
+## options
+
+The component also accepts an `opts` object with some options:
+ - `aspect: float` aspect ratio of the generated barcode
+ - `errlvl: [-1 .. 8]` error correction level in the barcode, `-1` means `auto`
+ - `pxw: float` pixel width
+ - `pxh: float` pixel height
+
+The default options are:
+```javascript
+defaults = { aspect: 4, errlvl: -1, pxw: 1, pxh: 1 }
+```
+ 
+Use property binding like this:
+```html
+<pdf417barcode [text]="'Hello, World!'" [opts]="{ pxw: 2, pxh: 2 }"></pdf417barcode>
+```
