@@ -1,19 +1,17 @@
-# PDF417-js
+# PDF417-module
 
-PDF417 - 2D barcode generator in Javascript
+_PDF417 barcode generator Module for Angular 2_
 
-From input code (any text) creates PDF417 barcode with option to draw it on canvas.
+Component that creates a canvas with a PDF417 barcode from any string input.
 
-This is direct port of TCPDF PHP library from:
-http://www.tcpdf.org/
-or 
-http://sourceforge.net/projects/tcpdf/files/
+## pdf417-js
 
-Version used for porting is tcpdf_6_2_11 or more specific PDF417 class version 1.0.005.
+PDF417-js is a direct port of parts of the [TCPDF PHP library] ([sourceforge]).
+[TCPDF PHP library]: https://www.tcpdf.org/ "TCPDF project homepage"
+[sourceforge]: https://sourceforge.net/projects/tcpdf/files/ "distribution files"
 
-Also using helper methods from:
-http://bcmath-js.sourceforge.net/
+Version used for porting is `tcpdf_6_2_11`
+or more specific PDF417 class version `1.0.005`.
 
-##Demo
-http://bkuzmic.github.io/pdf417-js/
-
+Original port is available on GitHub: [bkuzmic/pdf417-js]
+[bkuzmic/pdf417-js]: https://github.com/bkuzmic/pdf417-js
