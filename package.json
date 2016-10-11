@@ -1,6 +1,6 @@
 {
   "name": "angular2-pdf417-barcode",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "PDF417 barcode generator Module for Angular 2",
   "main": "index.ts",
   "scripts": {
