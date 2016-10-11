@@ -4,7 +4,7 @@
  * Original port by bkuzmic: https://github.com/bkuzmic/pdf417-js
  */
 
-var phpjs = require('phpjs');
+var phpbc = require('locutus/php/bc');
 
 var PDF417 = {
   ROWHEIGHT: 4,
@@ -733,17 +733,17 @@ var PDF417 = {
             sublen = code.length;
           }
           if (sublen == 6) {
-            var t = phpjs.bcmul(''+this._ord(code.charAt(0)), '1099511627776');
-            t = phpjs.bcadd(t, phpjs.bcmul('' + this._ord(code.charAt(1)), '4294967296'));
-            t = phpjs.bcadd(t, phpjs.bcmul('' + this._ord(code.charAt(2)), '16777216'));
-            t = phpjs.bcadd(t, phpjs.bcmul('' + this._ord(code.charAt(3)), '65536'));
-            t = phpjs.bcadd(t, phpjs.bcmul('' + this._ord(code.charAt(4)), '256'));
-            t = phpjs.bcadd(t, '' + this._ord(code.charAt(5)));
+            var t = phpbc.bcmul(''+this._ord(code.charAt(0)), '1099511627776');
+            t = phpbc.bcadd(t, phpbc.bcmul('' + this._ord(code.charAt(1)), '4294967296'));
+            t = phpbc.bcadd(t, phpbc.bcmul('' + this._ord(code.charAt(2)), '16777216'));
+            t = phpbc.bcadd(t, phpbc.bcmul('' + this._ord(code.charAt(3)), '65536'));
+            t = phpbc.bcadd(t, phpbc.bcmul('' + this._ord(code.charAt(4)), '256'));
+            t = phpbc.bcadd(t, '' + this._ord(code.charAt(5)));
             // tmp array for the 6 bytes block
             var cw6 = [];
             do {
               var d = this._my_bcmod(t, '900');
-              t = phpjs.bcdiv(t, '900');
+              t = phpbc.bcdiv(t, '900');
               // prepend the value to the beginning of the array
               cw6.unshift(d);
             } while (t != '0');
@@ -771,7 +771,7 @@ var PDF417 = {
           var t = '1' + code;
           do {
             var d = this._my_bcmod(t, '900');
-            t = phpjs.bcdiv(t, '900');
+            t = phpbc.bcdiv(t, '900');
             cw.unshift(d);
           } while (t != '0');
           code = rest;
