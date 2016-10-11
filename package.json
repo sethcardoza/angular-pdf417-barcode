@@ -1,5 +1,5 @@
 {
-  "name": "pdf417-module",
+  "name": "angular2-pdf417-barcode",
   "version": "0.2.0",
   "description": "PDF417 barcode generator Module for Angular 2",
   "main": "index.ts",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ansemjo/pdf417-module.git"
+    "url": "git+https://github.com/ansemjo/angular2-pdf417-barcode.git"
   },
   "keywords": [
     "angular2",
@@ -17,14 +17,18 @@
     "pdf417",
     "pdf417-js",
     "barcode",
-    "generator"
+    "generator",
+    "typescript"
   ],
-  "author": "ansemjo",
+  "author": "Anton Semjonov (https://semjonov.de/)",
+  "contributors": [
+    "Boris Kuzmic (https://github.com/bkuzmic/)"
+  ],
   "license": "LGPL-3.0",
   "bugs": {
-    "url": "https://github.com/ansemjo/pdf417-module/issues"
+    "url": "https://github.com/ansemjo/angular2-pdf417-barcode/issues"
   },
-  "homepage": "https://github.com/ansemjo/pdf417-module#readme",
+  "homepage": "https://github.com/ansemjo/angular2-pdf417-barcode#readme",
   "dependencies": {
     "phpjs": "^1.3.2"
   },
