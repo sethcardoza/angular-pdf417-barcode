@@ -6,7 +6,7 @@ const pixelwidth: number = 1;
 const pixelheight: number = 1;
 
 @Component({
-  selector: 'pdf417-barcode',
+  selector: 'pdf417barcode',
   template: `<div #container></div>`
 })
 export class PDF417BarcodeComponent implements AfterViewInit, OnChanges {
