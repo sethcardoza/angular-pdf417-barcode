@@ -2,9 +2,6 @@ import { Component, Input, ViewChild, AfterViewInit, OnChanges } from '@angular/
 
 const pdf417 = require('./pdf417');
 
-const pixelwidth: number = 1;
-const pixelheight: number = 1;
-
 @Component({
   selector: 'pdf417barcode',
   template: `<div #container></div>`
@@ -12,14 +9,20 @@ const pixelheight: number = 1;
 export class PDF417BarcodeComponent implements AfterViewInit, OnChanges {
 
   @Input() text: string = undefined;
+  @Input() opts: any = {};
   @ViewChild('container') container;
 
   private pdf417 = pdf417;
 
   private update (): void {
 
+    let aspectratio     : number = this.opts.aspect   || 4;
+    let errorcorrection : number = this.opts.errlvl   || -1;
+    let pixelheight     : number = this.opts.pxh      || 1;
+    let pixelwidth      : number = this.opts.pxw      || 1
+
     /* update the barcode class */
-    this.pdf417.init(this.text, null, 8);
+    this.pdf417.init(this.text, errorcorrection, aspectratio);
     const barcode = this.pdf417.getBarcodeArray();
 
     /* create a new canvas and get drawing context */
