@@ -2,7 +2,7 @@
   "name": "pdf417-module",
   "version": "0.1.0",
   "description": "PDF417 barcode generator Module for Angular 2",
-  "main": "module.ts",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
