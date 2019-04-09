@@ -1,6 +1,6 @@
 # Angular PDF417 Barcode
 
-An Angular2 component/module that creates a canvas with a PDF417 barcode from a string input.
+An Angular component/module that creates a canvas with a PDF417 barcode from a string input.
 
 ## Install
 
