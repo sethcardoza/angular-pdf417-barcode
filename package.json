@@ -1,6 +1,6 @@
 {
   "name": "pdf417-barcode-dev",
-  "version": "0.0.0",
+  "version": "0.4.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -27,16 +27,16 @@
     "@angular/cli": "~7.3.8",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
-    "@types/node": "~8.9.4",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
+    "locutus": "^2.0.5",
     "ng-packagr": "^4.2.0",
     "ts-node": "~7.0.0",
     "tsickle": ">=0.34.0",
     "tslib": "^1.9.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.2.2",
-    "locutus": "^2.0.5"
+    "typescript": "~3.2.2"
   }
 }
