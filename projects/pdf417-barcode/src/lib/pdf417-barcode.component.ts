@@ -1,18 +1,18 @@
 import { Component, Input, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
 
-const pdf417 = require('./pdf417');
+import { PDF417 } from './pdf417';
 
 @Component({
   selector: 'pdf417barcode',
   template: `<div #container></div>`
 })
-export class PDF417BarcodeComponent implements AfterViewInit, OnChanges {
+export class Pdf417BarcodeComponent implements AfterViewInit, OnChanges {
 
-  @Input() text: string = undefined;
+  @Input() text: string = '';
   @Input() opts: any = {};
-  @ViewChild('container') container;
+  @ViewChild('container') container: any;
 
-  private pdf417 = pdf417;
+  private pdf417 = PDF417;
 
   private update (): void {
 
@@ -38,7 +38,7 @@ export class PDF417BarcodeComponent implements AfterViewInit, OnChanges {
       var x = 0;
       /* for each column */
       for (var c = 0; c < barcode['num_cols']; ++c) {
-        if (barcode['bcode'][r][c] == 1) {
+        if (barcode['bcode'][r][c] == 1 && drawing != null) {
           drawing.fillRect(x, y, pixelwidth, pixelheight);
         }
         x += pixelwidth;
@@ -58,13 +58,3 @@ export class PDF417BarcodeComponent implements AfterViewInit, OnChanges {
   ngOnChanges() { this.update(); }
 
 }
-
-/* export a component for easier import too */
-import { NgModule } from '@angular/core';
-
-@NgModule({
-  declarations: [ PDF417BarcodeComponent ],
-  exports:      [ PDF417BarcodeComponent ]
-})
-export class PDF417BarcodeModule { }
-

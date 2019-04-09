@@ -1,42 +1,42 @@
 {
-  "name": "angular2-pdf417-barcode",
-  "version": "0.3.0",
-  "description": "PDF417 barcode generator Module for Angular 2",
-  "main": "index.ts",
+  "name": "pdf417-barcode-dev",
+  "version": "0.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ansemjo/angular2-pdf417-barcode.git"
-  },
-  "keywords": [
-    "angular2",
-    "angular",
-    "module",
-    "pdf417",
-    "pdf417-js",
-    "barcode",
-    "generator",
-    "typescript"
-  ],
-  "author": "Anton Semjonov (https://semjonov.de/)",
-  "contributors": [
-    "Boris Kuzmic (https://github.com/bkuzmic/)"
-  ],
-  "license": "LGPL-3.0",
-  "bugs": {
-    "url": "https://github.com/ansemjo/angular2-pdf417-barcode/issues"
-  },
-  "homepage": "https://github.com/ansemjo/angular2-pdf417-barcode#readme",
+  "private": true,
   "dependencies": {
-    "locutus": "^2.0.5"
+    "@angular/animations": "~7.2.0",
+    "@angular/common": "~7.2.0",
+    "@angular/compiler": "~7.2.0",
+    "@angular/core": "~7.2.0",
+    "@angular/forms": "~7.2.0",
+    "@angular/platform-browser": "~7.2.0",
+    "@angular/platform-browser-dynamic": "~7.2.0",
+    "@angular/router": "~7.2.0",
+    "core-js": "^2.5.4",
+    "rxjs": "~6.3.3",
+    "tslib": "^1.9.0",
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular/core": "^2.0.0",
-    "@types/node": "^6.0.45"
-  },
-  "peerDependencies": {
-    "@angular/core": "^2.0.0"
+    "@angular-devkit/build-angular": "~0.13.0",
+    "@angular-devkit/build-ng-packagr": "~0.13.0",
+    "@angular/cli": "~7.3.8",
+    "@angular/compiler-cli": "~7.2.0",
+    "@angular/language-service": "~7.2.0",
+    "@types/node": "~8.9.4",
+    "@types/jasmine": "~2.8.8",
+    "@types/jasminewd2": "~2.0.3",
+    "codelyzer": "~4.5.0",
+    "ng-packagr": "^4.2.0",
+    "ts-node": "~7.0.0",
+    "tsickle": ">=0.34.0",
+    "tslib": "^1.9.0",
+    "tslint": "~5.11.0",
+    "typescript": "~3.2.2",
+    "locutus": "^2.0.5"
   }
 }

@@ -6,7 +6,7 @@
 
 var phpbc = require('locutus/php/bc');
 
-var PDF417 = {
+export const PDF417 = {
   ROWHEIGHT: 4,
   QUIETH: 2,
   QUIETV: 2,
@@ -439,8 +439,8 @@ var PDF417 = {
       return false;
     }
     // get the input sequence array
-    sequence = this.getInputSequences(code);    
-    codewords = []; // array of code-words
+    let sequence = this.getInputSequences(code);    
+    let codewords = []; // array of code-words
     for(var i=0;i<sequence.length; i++) {
       var cw = this.getCompaction(sequence[i][0], sequence[i][1], true);
       codewords = codewords.concat(cw);
@@ -625,7 +625,7 @@ var PDF417 = {
         } else {
           // add offset to each matched line
           for (var n=0;n<textseq.length;n++) {
-            var offset = prevseq.indexOf(textseq[n]);
+            var offset: number = prevseq.indexOf(textseq[n]);
             textseq[n] = [textseq[n], offset];
           }
         }       
@@ -733,7 +733,7 @@ var PDF417 = {
             sublen = code.length;
           }
           if (sublen == 6) {
-            var t = phpbc.bcmul(''+this._ord(code.charAt(0)), '1099511627776');
+            var t: string = phpbc.bcmul(''+this._ord(code.charAt(0)), '1099511627776');
             t = phpbc.bcadd(t, phpbc.bcmul('' + this._ord(code.charAt(1)), '4294967296'));
             t = phpbc.bcadd(t, phpbc.bcmul('' + this._ord(code.charAt(2)), '16777216'));
             t = phpbc.bcadd(t, phpbc.bcmul('' + this._ord(code.charAt(3)), '65536'));
@@ -971,7 +971,7 @@ var PDF417 = {
     };
 
     // justify()
-    var justify = function (value, prefix, leftJustify, minWidth, zeroPad, customPadChar) {
+    var justify = function (value, prefix, leftJustify, minWidth, zeroPad, customPadChar?) {
       var diff = minWidth - value.length;
       if (diff > 0) {
         if (leftJustify || !zeroPad) {
@@ -997,7 +997,7 @@ var PDF417 = {
     };
 
     // formatString()
-    var formatString = function (value, leftJustify, minWidth, precision, zeroPad, customPadChar) {
+    var formatString = function (value, leftJustify, minWidth, precision, zeroPad, customPadChar?) {
       if (precision != null) {
         value = value.slice(0, precision);
       }
@@ -1141,8 +1141,8 @@ var PDF417 = {
       limit = limit || 0; flags = flags || ''; // Limit and flags are optional
 
       var result, ret=[], index=0, i = 0,
-          noEmpty = false, delim = false, offset = false,
-          OPTS = {}, optTemp = 0,
+          noEmpty = 0, delim = 0, offset = 0,
+          OPTS: { [s: string]: number } = {}, optTemp = 0,
           regexpBody = /^\/(.*)\/\w*$/.exec(pattern.toString())[1],
           regexpFlags = /^\/.*\/(\w*)$/.exec(pattern.toString())[1];
           // Non-global regexp causes an infinite loop when executing the while,
@@ -1263,7 +1263,7 @@ var PDF417 = {
       do {
           var a = parseInt(mod + '' + x.substring(0, take));
           x = x.substring(take);
-          mod = a % y;   
+          mod = (a % y).toString();
       }
       while ( x.length );
 
@@ -1271,5 +1271,3 @@ var PDF417 = {
   }
 
 };
-
-module.exports = PDF417;
