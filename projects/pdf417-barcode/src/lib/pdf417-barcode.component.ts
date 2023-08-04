@@ -4,6 +4,7 @@ import { PDF417 } from './pdf417';
 
 @Component({
   selector: 'pdf417barcode',
+  standalone: true,
   template: `<div #container></div>`
 })
 export class Pdf417BarcodeComponent implements AfterViewInit, OnChanges {
@@ -49,7 +50,7 @@ export class Pdf417BarcodeComponent implements AfterViewInit, OnChanges {
     /* replace canvas in container */
     if (this.container && this.container.nativeElement) {
       const el: HTMLCanvasElement = this.container.nativeElement;
-      
+
       if (el.firstChild) el.removeChild(el.firstChild);
       el.appendChild(newcanvas);
     }

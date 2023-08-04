@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
-import { Pdf417BarcodeModule } from "pdf417-barcode";
+import { Pdf417BarcodeComponent } from 'pdf417-barcode';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import { Pdf417BarcodeModule } from "pdf417-barcode";
   imports: [
     BrowserModule,
     FormsModule,
-    Pdf417BarcodeModule,
+    Pdf417BarcodeComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

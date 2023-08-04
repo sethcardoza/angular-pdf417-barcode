@@ -1,2 +1,1 @@
-export * from './lib/pdf417-barcode.component';
-export * from './lib/pdf417-barcode.module';
+export { Pdf417BarcodeComponent } from './lib/pdf417-barcode.component';

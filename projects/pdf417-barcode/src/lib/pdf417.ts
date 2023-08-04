@@ -4,7 +4,7 @@
  * Original port by bkuzmic: https://github.com/bkuzmic/pdf417-js
  */
 
-var phpbc = require('locutus/php/bc');
+import { bcadd, bcdiv, bcmul } from 'locutus/php/bc';
 
 export const PDF417 = {
   ROWHEIGHT: 4,
@@ -16,7 +16,7 @@ export const PDF417 = {
   stop_pattern: '111111101000101001',
 
   /**
-   * Array of text Compaction Sub-Modes (values 0xFB - 0xFF are used for submode changers).  
+   * Array of text Compaction Sub-Modes (values 0xFB - 0xFF are used for submode changers).
    */
   textsubmodes: [
     [0x41,0x42,0x43,0x44,0x45,0x46,0x47,0x48,0x49,0x4a,0x4b,0x4c,0x4d,0x4e,0x4f,0x50,0x51,0x52,0x53,0x54,0x55,0x56,0x57,0x58,0x59,0x5a,0x20,0xFD,0xFE,0xFF], // Alpha
@@ -26,7 +26,7 @@ export const PDF417 = {
   ],
 
   /**
-   * Array of switching codes for Text Compaction Sub-Modes.   
+   * Array of switching codes for Text Compaction Sub-Modes.
    */
   textlatch: {
     '01': [27], '02': [28], '03': [28,25], //
@@ -54,7 +54,7 @@ export const PDF417 = {
    * <li>926 : Identifier for a general purpose ECI format</li>
    * <li>927 : Identifier for an ECI of a character set or code page</li>
    * <li>928 : Macro marker codeword to indicate the beginning of a Macro PDF Control Block</li>
-   * </ul>   
+   * </ul>
    */
   clusters: [
     [ // cluster 0 -----------------------------------------------------------------------
@@ -338,7 +338,7 @@ export const PDF417 = {
       0x11f64,0x10f22,0x11f62,0x10716,0x10f36,0x11f76,0x1cfd4,0x1cfd2,0x18f94,0x19fb4, // 900
       0x18f92,0x19fb2,0x10f14,0x11f34,0x10f12,0x13f74,0x11f32,0x13f72,0x1cfca,0x18f8a, // 910
       0x19f9a,0x10f0a,0x11f1a,0x13f3a,0x103ac,0x103a6,0x107a8,0x183d6,0x107a4,0x107a2, // 920
-      0x10396,0x107b6,0x187d4,0x187d2,0x10794,0x10fb4,0x10792,0x10fb2,0x1c7ea]         // 929 
+      0x10396,0x107b6,0x187d4,0x187d2,0x10794,0x10fb4,0x10792,0x10fb2,0x1c7ea]         // 929
   ],
 
   /**
@@ -421,25 +421,25 @@ export const PDF417 = {
       0x2cd,0x02d,0x06f,0x014,0x254,0x11c,0x2e0,0x08a,0x286,0x19b,0x36d,0x29d,0x08d,0x397,0x02d,0x30c, // 480
       0x197,0x0a4,0x14c,0x383,0x0a5,0x2d6,0x258,0x145,0x1f2,0x28f,0x165,0x2f0,0x300,0x0df,0x351,0x287, // 496
       0x03f,0x136,0x35f,0x0fb,0x16e,0x130,0x11a,0x2e2,0x2a3,0x19a,0x185,0x0f4,0x01f,0x079,0x12f,0x107] // 512
-  ],  
+  ],
 
   /**
    * This is the class constructor.
    * Creates a PDF417 object
    * @param code (string) code to represent using PDF417
    * @param ecl (int) error correction level (0-8); default -1 = automatic correction level
-   * @param aspectratio (float) the width to height of the symbol (excluding quiet zones)  
+   * @param aspectratio (float) the width to height of the symbol (excluding quiet zones)
    */
-  init: function(code, ecl, aspectratio) {    
-    code = unescape(encodeURIComponent(code)); // covert UTF-8 to ISO-8859-1 
+  init: function(code, ecl, aspectratio) {
+    code = unescape(encodeURIComponent(code)); // covert UTF-8 to ISO-8859-1
     ecl = ecl || -1;
-    aspectratio = aspectratio || 2;   
+    aspectratio = aspectratio || 2;
     this.barcode_array = {};
     if (code === "") {
       return false;
     }
     // get the input sequence array
-    let sequence = this.getInputSequences(code);    
+    let sequence = this.getInputSequences(code);
     let codewords = []; // array of code-words
     for(var i=0;i<sequence.length; i++) {
       var cw = this.getCompaction(sequence[i][0], sequence[i][1], true);
@@ -454,7 +454,7 @@ export const PDF417 = {
     if (numcw > 925) {
       // reached maximum data codeword capacity
       return false;
-    }   
+    }
 
     // set error correction level
     ecl = this.getErrorCorrectionLevel(ecl, numcw);
@@ -597,10 +597,10 @@ export const PDF417 = {
   getInputSequences: function(code) {
     var sequence_array = []; // array to be returned
     var numseq = [];
-    // get numeric sequences    
+    // get numeric sequences
     numseq = code.match(/([0-9]{13,44})/g);
     if (numseq == null) {
-      numseq = [];      
+      numseq = [];
     } else {
       // add offset to each matched line
       for (var n = 0, offset = 0; n < numseq.length; n++) {
@@ -612,23 +612,23 @@ export const PDF417 = {
     numseq.push(['', code.length]);
     var offset = 0;
     for(var i=0; i<numseq.length; i++) {
-      var seq = numseq[i];      
+      var seq = numseq[i];
       var seqlen = seq[0].length;
       if (seq[1] > 0) {
         // extract text sequence before the number sequence
         var prevseq = code.substr(offset, (seq[1] - offset));
         var textseq = [];
-        // get text sequences       
+        // get text sequences
         textseq = prevseq.match(/([\x09\x0a\x0d\x20-\x7e]{5,})/g);
         if (textseq == null) {
-          textseq = [];       
+          textseq = [];
         } else {
           // add offset to each matched line
           for (var n=0;n<textseq.length;n++) {
             var offset: number = prevseq.indexOf(textseq[n]);
             textseq[n] = [textseq[n], offset];
           }
-        }       
+        }
         textseq.push(['', prevseq.length]);
         var txtoffset = 0;
         for(var j=0; j<textseq.length; j++) {
@@ -723,27 +723,27 @@ export const PDF417 = {
         var rest;
         var sublen;
         var codelen;
-        while ((codelen = code.length) > 0) {         
+        while ((codelen = code.length) > 0) {
           if (codelen > 6) {
             rest = code.substring(6);
             code = code.substring(0, 6);
             sublen = 6;
-          } else {            
+          } else {
             rest = '';
             sublen = code.length;
           }
           if (sublen == 6) {
-            var t: string = phpbc.bcmul(''+this._ord(code.charAt(0)), '1099511627776');
-            t = phpbc.bcadd(t, phpbc.bcmul('' + this._ord(code.charAt(1)), '4294967296'));
-            t = phpbc.bcadd(t, phpbc.bcmul('' + this._ord(code.charAt(2)), '16777216'));
-            t = phpbc.bcadd(t, phpbc.bcmul('' + this._ord(code.charAt(3)), '65536'));
-            t = phpbc.bcadd(t, phpbc.bcmul('' + this._ord(code.charAt(4)), '256'));
-            t = phpbc.bcadd(t, '' + this._ord(code.charAt(5)));
+            var t: string = bcmul(''+this._ord(code.charAt(0)), '1099511627776');
+            t = bcadd(t, bcmul('' + this._ord(code.charAt(1)), '4294967296'));
+            t = bcadd(t, bcmul('' + this._ord(code.charAt(2)), '16777216'));
+            t = bcadd(t, bcmul('' + this._ord(code.charAt(3)), '65536'));
+            t = bcadd(t, bcmul('' + this._ord(code.charAt(4)), '256'));
+            t = bcadd(t, '' + this._ord(code.charAt(5)));
             // tmp array for the 6 bytes block
             var cw6 = [];
             do {
               var d = this._my_bcmod(t, '900');
-              t = phpbc.bcdiv(t, '900');
+              t = bcdiv(t, '900');
               // prepend the value to the beginning of the array
               cw6.unshift(d);
             } while (t != '0');
@@ -771,7 +771,7 @@ export const PDF417 = {
           var t = '1' + code;
           do {
             var d = this._my_bcmod(t, '900');
-            t = phpbc.bcdiv(t, '900');
+            t = bcdiv(t, '900');
             cw.unshift(d);
           } while (t != '0');
           code = rest;
@@ -846,7 +846,7 @@ export const PDF417 = {
       if (ecw[j] != 0) {
         ecw[j] = 929 - ecw[j];
       }
-    }       
+    }
     ecw = ecw.reverse();
     return ecw;
   },
@@ -860,8 +860,8 @@ export const PDF417 = {
      * Functions from phpjs.org
      *
      */
-  _array_fill: function(start_index, num, mixed_val) {    
-    var key, tmp_arr = {};  
+  _array_fill: function(start_index, num, mixed_val) {
+    var key, tmp_arr = {};
 
     if (start_index == 0) {
       var tmpArray = [];
@@ -878,7 +878,7 @@ export const PDF417 = {
       }
 
       return tmp_arr;
-  },  
+  },
 
   _str_repeat:function(input, multiplier) {
     // http://kevin.vanzonneveld.net
@@ -1210,7 +1210,7 @@ export const PDF417 = {
   },
 
 
-  _ord: function(string) {    
+  _ord: function(string) {
     return string.charCodeAt(0);
   },
 
@@ -1258,7 +1258,7 @@ export const PDF417 = {
 
   _my_bcmod: function(x, y) {
       // how many numbers to take at once? carefull not to exceed (int)
-      var take = 5;    
+      var take = 5;
       var mod = '';
       do {
           var a = parseInt(mod + '' + x.substring(0, take));
@@ -1267,7 +1267,7 @@ export const PDF417 = {
       }
       while ( x.length );
 
-      return parseInt(mod); 
+      return parseInt(mod);
   }
 
 };

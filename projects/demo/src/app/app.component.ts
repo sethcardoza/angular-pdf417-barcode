@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <div style="text-align:center">
       <h1>
-        ansemjo/angular-pdf417-barcode demo
+        sethcardoza/angular-pdf417-barcode demo
       </h1>
       <span>
         Enter your text:
