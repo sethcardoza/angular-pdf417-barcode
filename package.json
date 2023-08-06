@@ -29,7 +29,6 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~16.18.0",
-    "codelyzer": "~6.0.2",
     "locutus": "^2.0.16",
     "ng-packagr": "^16.0.0",
     "ts-node": "~10.9.0",
