@@ -4,9 +4,7 @@ An Angular component/module that creates a canvas with a PDF417 barcode from a s
 
 ## Install
 
-Use it in your Angular project by installing with `yarn` or `npm`:
-
-    yarn add pdf417-barcode
+Use it in your Angular project by installing with `npm`:
 
 ## Usage
 
